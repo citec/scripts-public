@@ -16,7 +16,9 @@ fi
 oldhostname=$(cat /etc/hostname)
 
 # Install puppet and facter
-apt-get install puppet facter > /dev/null
+echo "Installing puppet..."
+apt-get install -y puppet facter > /dev/null
+echo "DONE"
 
 # Change hostname
 echo "Enter new hostname: "
