@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#
+# Command to load this file:
+#
+# wget -O - https://bitbucket.org/grupocitec/public/raw/master/install_workstation.sh | sudo /bin/bash
+#
+
 # Run only as root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
