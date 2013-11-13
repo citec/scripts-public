@@ -6,6 +6,8 @@
 # wget -O - https://bitbucket.org/grupocitec/public/raw/master/install_workstation.sh | sudo /bin/bash
 #
 
+set -e
+
 # Run only as root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
@@ -26,6 +28,8 @@ service hostname restart
 echo "Installing puppet... "
 apt-get install -y puppet facter > /dev/null
 echo "DONE"
+
+set +e
 
 # Connect to puppet master 
 printf "Connection to puppet master to request authentication... "
