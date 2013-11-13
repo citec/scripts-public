@@ -3,7 +3,7 @@
 #
 # Command to load this file:
 #
-# wget -O - https://bitbucket.org/grupocitec/public/raw/master/install_workstation.sh | sudo /bin/bash
+# wget https://bitbucket.org/grupocitec/public/raw/master/install_workstation.sh && sudo /bin/bash install_workstation.sh
 #
 
 set -e
