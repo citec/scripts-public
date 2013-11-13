@@ -27,6 +27,8 @@ service hostname restart
 # Install puppet and facter
 echo "Installing puppet... "
 apt-get install -y puppet facter > /dev/null
+service puppet stop
+puppet agent --enable --no-daemonize
 echo "DONE"
 
 set +e
