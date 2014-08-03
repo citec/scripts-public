@@ -31,6 +31,8 @@ command -v facter >/dev/null 2>&1 || {
     }
 echo "Stopping puppet service... "
 service puppet stop
+rm -rf /var/lib/puppet/ssl
+puppet cert generate $(hostname -f)
 puppet agent --enable --no-daemonize
 echo "DONE"
 
