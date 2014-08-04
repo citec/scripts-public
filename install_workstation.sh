@@ -14,6 +14,20 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
+# Locale
+locale-gen pt_BR.UTF-8
+dpkg-reconfigure locales
+
+#bitbucket and grupocitec keys
+[ ! -d /root/.ssh ] && mkdir /root/.ssh
+/usr/bin/ssh-keyscan -H bitbucket.org >> /root/.ssh/known_hosts
+/usr/bin/ssh-keyscan -H grupocitec.com >> /root/.ssh/known_hosts
+getent passwd ops || useradd -d /home/ops -s /bin/bash ops
+[ ! -d /home/ops/.ssh ] && mkdir /home/ops/.ssh
+/usr/bin/ssh-keyscan -H bitbucket.org >> /home/ops/.ssh/known_hosts
+/usr/bin/ssh-keyscan -H grupocitec.com >> /home/ops/.ssh/known_hosts
+
+
 # Gather some data
 oldhostname=$(cat /etc/hostname)
 
@@ -42,6 +56,7 @@ command -v facter >/dev/null 2>&1 || {
     }
 echo "Stopping puppet service... "
 service puppet stop
+rm -rf /var/lib/puppet/ssl
 puppet agent --enable --no-daemonize
 echo "DONE"
 
@@ -49,15 +64,10 @@ set +e
 
 # Connect to puppet master 
 printf "Connection to puppet master to request authentication... "
-puppet agent --server=puppet.grupocitec.com --no-daemonize --onetime #2>&1 > /dev/null
+printf "Call/Write devops@grupocitec.com and ask for activation of your node ($(hostname -f))"
+puppet agent --verbose --server=config.grupocitec.com --test --waitforcert 10
 echo "DONE"
-printf "Now go to GrupoCITEC's OpenERP and authorize your host, then press enter here"
 read ENTER
-
-# Connect to puppet master 
-echo "Installing workstation... "
-puppet agent --server=puppet.grupocitec.com --no-daemonize --onetime --verbose
-echo "DONE"
 
 # Final message
 echo "If you didn't see any error messages, your workstation should be ready"

@@ -18,6 +18,10 @@ fi
 locale-gen pt_BR.UTF-8
 dpkg-reconfigure locales
 
+#bitbucket and grupocitec keys
+/usr/bin/ssh-keyscan -H bitbucket.org >> /root/.ssh/known_hosts
+/usr/bin/ssh-keyscan -H grupocitec.com >> /root/.ssh/known_hosts
+
 # Install puppet and facter
 command -v puppet >/dev/null 2>&1 || { 
     echo "Installing puppet... "
