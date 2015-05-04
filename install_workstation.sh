@@ -15,14 +15,14 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # Locale
-locale-gen pt_BR.UTF-8
+locale-gen pt_BR.UTF-8 es_ES.UTF-8 en_US.UTF-8
 dpkg-reconfigure locales
 
 #bitbucket and grupocitec keys
 [ ! -d /root/.ssh ] && mkdir /root/.ssh
 /usr/bin/ssh-keyscan -H bitbucket.org >> /root/.ssh/known_hosts
 /usr/bin/ssh-keyscan -H grupocitec.com >> /root/.ssh/known_hosts
-getent passwd ops || useradd -d /home/ops -s /bin/bash ops
+getent passwd ops || mkdir -p /home/ops && useradd -d /home/ops -s /bin/bash ops && chown -R ops:ops /home/ops
 [ ! -d /home/ops/.ssh ] && mkdir /home/ops/.ssh
 /usr/bin/ssh-keyscan -H bitbucket.org >> /home/ops/.ssh/known_hosts
 /usr/bin/ssh-keyscan -H grupocitec.com >> /home/ops/.ssh/known_hosts
