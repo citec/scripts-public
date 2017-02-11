@@ -3,7 +3,7 @@
 #
 # Command to load this file:
 #
-# wget https://bitbucket.org/grupocitec/public/raw/master/install_foreman && sudo /bin/bash install_foreman.sh
+# wget https://raw.githubusercontent.com/citec/scripts-public/master/install_foreman.sh && sudo /bin/bash install_foreman.sh
 #
 
 set -e
@@ -18,8 +18,8 @@ fi
 locale-gen pt_BR.UTF-8
 dpkg-reconfigure locales
 
-#bitbucket and grupocitec keys
-/usr/bin/ssh-keyscan -H bitbucket.org >> /root/.ssh/known_hosts
+# github and grupocitec keys
+/usr/bin/ssh-keyscan -H github.com >> /root/.ssh/known_hosts
 /usr/bin/ssh-keyscan -H grupocitec.com >> /root/.ssh/known_hosts
 
 # Install puppet and facter
@@ -44,7 +44,7 @@ set +e
 
 # Connect to puppet master 
 cd /tmp
-wget https://bitbucket.org/grupocitec/public/raw/master/install_foreman.pp
+wget https://raw.githubusercontent.com/citec/scripts-public/master/install_foreman.pp
 puppet apply /tmp/install_foreman.pp
 
 echo "Now go to https://$(hostname) and login with 'admin' and 'changeme"
