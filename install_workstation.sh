@@ -74,8 +74,9 @@ read ENTER
 
 echo "If you see some green messages after the 'Notice: Did not receive certificate' message, it means your node is authorized"
 echo "Now press ENTER to run puppet agent again and get your node definition"
-puppet agent --verbose --server=config.grupocitec.com --test --waitforcert 10
 read ENTER
+puppet agent --verbose --server=config.grupocitec.com --test --waitforcert 10
+echo "DONE"
 
 # Final message
 echo "If you didn't see any error messages, your workstation should be ready"
