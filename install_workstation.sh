@@ -14,6 +14,9 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
+# Update apt repositories
+apt-get update
+
 # Locale
 locale-gen pt_BR.UTF-8 es_ES.UTF-8 en_US.UTF-8
 dpkg-reconfigure locales
