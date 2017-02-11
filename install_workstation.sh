@@ -69,7 +69,7 @@ set +e
 printf "Connection to puppet master to request authentication... "
 printf "Call/Write devops@grupocitec.com and ask for activation of your node ($(hostname -f))"
 puppet agent --verbose --server=config.grupocitec.com --test --waitforcert 10
-echo "DONE"
+echo "DONE, press ENTER now"
 read ENTER
 
 echo "If you see some green messages after the 'Notice: Did not receive certificate' message, it means your node is authorized"
